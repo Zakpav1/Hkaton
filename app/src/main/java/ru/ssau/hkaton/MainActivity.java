@@ -382,21 +382,16 @@ public class MainActivity extends AppCompatActivity {
         float ay[] = new float[2500];
         float az[] = new float[2500];
 
-        public void Sort(String[] args) {
+        public void Sort(View view) {
             try {
-                try {
+
 
                     byte[] buffer = new byte[1];
                     int bytes = myThreadConnected.connectedInputStream.read(buffer);
                     String strIncom = new String(buffer, 0, bytes);
-                    sb.append(strIncom); // собираем символы в строку
-                   // Toast.makeText(MainActivity.this, sb, Toast.LENGTH_LONG).show();
-
-                }
-                catch (IOException e){
-                    Toast.makeText(MainActivity.this, "Нет  передачи данных", Toast.LENGTH_LONG).show();
-                }
-                int i = 0;
+                    sb.append(strIncom); // собираем символы в строкb
+                    String line = sb.append(strIncom).toString();
+                    int i = 0;
                 while (line != "00000000") {
                     for (int k = 0; k < 7; k++) {
                         String[] subStr;
@@ -429,7 +424,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     i++;
-                    line = reader.readLine();
+                    buffer = new byte[1];
+                    bytes = myThreadConnected.connectedInputStream.read(buffer);
+                    strIncom = new String(buffer, 0, bytes);
+                    sb.append(strIncom); // собираем символы в строкb
+                    line = sb.append(strIncom).toString();
+                    TextView textView = findViewById(R.id.d10);
+                    textView.setText((int) x[i]);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

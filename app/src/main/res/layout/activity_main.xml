@@ -139,7 +139,7 @@
             android:src="@drawable/offlamp"
             android:layout_marginTop="260dp"
             android:layout_marginLeft="30dp"
-            android:onClick="onClickBut7" />
+            android:onClick="Sort" />
 
         <TextView
             android:layout_width="wrap_content"
