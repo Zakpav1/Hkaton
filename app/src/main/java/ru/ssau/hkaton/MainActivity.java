@@ -386,20 +386,44 @@ public class MainActivity extends AppCompatActivity {
 //            try {
 
 String line = " ";
-            while (line.charAt(line.length()-1)!='^') {
-                byte[] buffer = new byte[1];
-                int bytes = 0;
-                try {
-                    bytes = myThreadConnected.connectedInputStream.read(buffer);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            int[][] zn = new int[0][];
+            while(line!="00000000") {
+                line = " ";
+                while (line.charAt(line.length() - 1) != '^') {
+                    byte[] buffer = new byte[1];
+                    int bytes = 0;
+                    try {
+                        bytes = myThreadConnected.connectedInputStream.read(buffer);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String strIncom = new String(buffer, 0, bytes);
+                    //          sb.append(strIncom); // собираем символы в строкb
+                    line = sb.append(strIncom).toString();
                 }
-                String strIncom = new String(buffer, 0, bytes);
-      //          sb.append(strIncom); // собираем символы в строкb
-                line = sb.append(strIncom).toString();
-            }
-                TextView tw = (TextView)findViewById(R.id.d10);
+                int[] subInt = new int[5];
+
+                int iter = 0;
+
+                for(int i = 0;i<5;i++){
+                    String temp = " ";
+                    while(line.charAt(iter) != '&' && line.charAt(iter) != '^'){
+                        temp = temp + String.valueOf(line.charAt(iter));
+                        iter++;
+                    }
+
+//                    subInt[i] = Integer.parseInt(temp);
+                    Toast.makeText(MainActivity.this, temp, Toast.LENGTH_LONG).show();
+
+                   iter++;
+                }
+//                subInt = Integer.parseInt(line.split(del));
+
+                TextView tw = (TextView) findViewById(R.id.d10);
                 tw.setText(line);
+//                TextView tw1 = (TextView) findViewById(R.id.d12);
+//                tw1.setText(subInt[3]);
+            }
  /*               int i = 0;
                 while (line != "00000000") {
                     for (int k = 0; k < 7; k++) {
