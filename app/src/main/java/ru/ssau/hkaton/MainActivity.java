@@ -383,14 +383,24 @@ public class MainActivity extends AppCompatActivity {
         float az[] = new float[2500];
 
         public void Sort(View view) {
-            try {
-                    byte[] buffer = new byte[1];
-                    int bytes = myThreadConnected.connectedInputStream.read(buffer);
-                    String strIncom = new String(buffer, 0, bytes);
-                    sb.append(strIncom); // собираем символы в строкb
-                    String line = sb.append(strIncom).toString();
-                    int i = 0;
+//            try {
 
+String line = " ";
+            while (line.charAt(line.length()-1)!='^') {
+                byte[] buffer = new byte[1];
+                int bytes = 0;
+                try {
+                    bytes = myThreadConnected.connectedInputStream.read(buffer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String strIncom = new String(buffer, 0, bytes);
+      //          sb.append(strIncom); // собираем символы в строкb
+                line = sb.append(strIncom).toString();
+            }
+                TextView tw = (TextView)findViewById(R.id.d10);
+                tw.setText(line);
+ /*               int i = 0;
                 while (line != "00000000") {
                     for (int k = 0; k < 7; k++) {
                         String[] subStr;
@@ -436,6 +446,8 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            */
+
         }
     }
 
