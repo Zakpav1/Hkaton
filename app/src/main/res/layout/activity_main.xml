@@ -51,7 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="D10"
+            android:text="D14"
             android:id="@+id/d10"
             android:layout_gravity="center_horizontal|top"
             android:textSize="30dp"
